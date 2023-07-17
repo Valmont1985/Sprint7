@@ -32,7 +32,7 @@ mvn allure:serve
 
 Тебе предстоит протестировать API учебного сервиса [Яндекс.Самокат](http://qa-scooter.praktikum-services.ru/).
 
-Его документация: [Ez-scooter](qa-scooter.praktikum-services.ru/docs/).
+Его документация: [Ez-scooter](https://qa-scooter.praktikum-services.ru/docs/).
 
 ## Подготовка
 
