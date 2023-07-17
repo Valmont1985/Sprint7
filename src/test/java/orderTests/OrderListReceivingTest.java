@@ -4,7 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.Test;
-import ru.yandex.order.OrderSteps;
+import order.OrderSteps;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 

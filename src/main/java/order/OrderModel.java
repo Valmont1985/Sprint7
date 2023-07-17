@@ -1,4 +1,4 @@
-package ru.yandex.order;
+package order;
 
 import java.util.List;
 
@@ -17,14 +17,14 @@ public class OrderModel {
     }
 
     public OrderModel(List<String> colour) {
-        this.firstName = "Chuck";
-        this.lastName = "Norris";
-        this.address = "LowKick str., 69";
-        this.metroStation = "ChuckStation";
-        this.phone = "+1696661315";
+        this.firstName = "Darth";
+        this.lastName = "Vader";
+        this.address = "DeathStar str., 666";
+        this.metroStation = "Control Station";
+        this.phone = "+9851231213";
         this.rentTime = "7";
-        this.deliveryDate = "2023-03-23";
-        this.comment = "Chuck Norris writes code that optimizes itself.";
+        this.deliveryDate = "2023-07-17";
+        this.comment = "Choose the dark side!!!";
         this.colour = colour;
     }
 

@@ -1,6 +1,6 @@
-package ru.yandex.courier;
+package courier;
 
-public class CourierCreds {
+public class CourierCreds{
     private String login;
     private String password;
 

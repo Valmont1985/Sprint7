@@ -7,7 +7,7 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.yandex.courier.*;
+import courier.*;
 
 public class LoginCourierTests {
     private final CourierRandomizer courierRandomizer = new CourierRandomizer();
@@ -29,7 +29,7 @@ public class LoginCourierTests {
 
     @Test
     @DisplayName("Логин курьера успешен")
-    @Description("Проверяем, что курьер может войти в систему с валидными данными")
+    @Description("Проверяем, что курьер может войти в систему с корректными данными")
     public void courierLoginOkValidData() {
         ValidatableResponse responseLoginCourier = courierSteps.loginCourier(courierCreds);
         courierAssert.loginCourierOk(responseLoginCourier);
@@ -65,8 +65,8 @@ public class LoginCourierTests {
     }
 
     @Test
-    @DisplayName("Логин курьера c невалидным логином")
-    @Description("Проверяем, что курьер не может войти в систему с ранее не зарегистрированным логином")
+    @DisplayName("Логин курьера c не корректным логином")
+    @Description("Проверяем, что курьер не может войти в систему не зарегистрированным логином")
     public void courierLoginErrorAccountNotFound() {
         CourierCreds courierCredsErrorAccountNotFound = new CourierCreds(CourierRandomizer.NEW_LOGIN_FAKED, courierModel.getPassword());
         ValidatableResponse responseLoginErrorMessage = courierSteps.loginCourier(courierCredsErrorAccountNotFound);

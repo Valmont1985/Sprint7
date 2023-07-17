@@ -9,8 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import ru.yandex.order.OrderModel;
-import ru.yandex.order.OrderSteps;
+import order.OrderModel;
+import order.OrderSteps;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class OrderParamTest {
     }
 
     @After
-    @Step("Cancel test order")
+    @Step("Отменить тестовый заказ")
     public void CancelTestOrder() {
         orderSteps.cancelOrder(track);
     }

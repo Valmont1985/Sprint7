@@ -7,7 +7,7 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import ru.yandex.courier.*;
+import courier.*;
 
 public class CreateCourierTests {
     protected final CourierRandomizer courierRandomizer = new CourierRandomizer();
@@ -43,7 +43,7 @@ public class CreateCourierTests {
     }
 
     @Test
-    @DisplayName("Создание курьера с пустым полем логина")
+    @DisplayName("Создание курьера с без логина")
     @Description("Проверяем, что курьера нельзя создать без логина")
     public void courierCanNotBeCreatedWithoutLogin() {
         courierModel.setLogin(null);
@@ -52,7 +52,7 @@ public class CreateCourierTests {
     }
 
     @Test
-    @DisplayName("Создание курьера с пустым полем пароля")
+    @DisplayName("Создание курьера с без пароля")
     @Description("Проверяем, что курьера нельзя создать без пароля")
     public void courierCanNotBeCreatedWithoutPassword() {
         courierModel.setPassword(null);
@@ -61,7 +61,7 @@ public class CreateCourierTests {
     }
 
     @Test
-    @DisplayName("Создание курьера с пустым полем логина и пароля")
+    @DisplayName("Создание курьера с без логина и пароля")
     @Description("Проверяем, что курьера нельзя создать без ввода логина и пароля")
     public void courierCanNotBeCreatedWithoutLoginAndPassword() {
         courierModel.setLogin(null);

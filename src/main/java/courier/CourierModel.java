@@ -1,4 +1,4 @@
-package ru.yandex.courier;
+package courier;
 
 public class CourierModel {
     private String login;

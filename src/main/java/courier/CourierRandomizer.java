@@ -1,4 +1,4 @@
-package ru.yandex.courier;
+package courier;
 
 import com.github.javafaker.Faker;
 import io.qameta.allure.Step;

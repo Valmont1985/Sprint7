@@ -1,4 +1,4 @@
-package ru.yandex.courier;
+package courier;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
@@ -8,7 +8,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 
 public class CourierAssert {
-    @Step("Регистрация нового курьера с валидными данными")
+    @Step("Регистрация нового курьера с корректными данными")
     public void createCourierOk(ValidatableResponse response) {
         response.assertThat()
                 .statusCode(201)
@@ -29,7 +29,7 @@ public class CourierAssert {
                 .body("message", equalTo("Этот логин уже используется. Попробуйте другой."));
     }
 
-    @Step("Проверка получения ID при логине с валидными данными")
+    @Step("Проверка получения ID при логине с корректными данными")
     public int loginCourierOk(ValidatableResponse response) {
         return response.assertThat()
                 .statusCode(200)
@@ -45,7 +45,7 @@ public class CourierAssert {
                 .body("message", equalTo("Недостаточно данных для входа"));
     }
 
-    @Step("Проверка ответа сервера при логине с невалидными данными")
+    @Step("Проверка ответа сервера при логине с не корректными данными")
     public void loginCourierErrorAccountNotFound(ValidatableResponse response) {
         response.assertThat()
                 .statusCode(404)
