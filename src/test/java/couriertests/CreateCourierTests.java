@@ -1,5 +1,6 @@
 package couriertests;
 
+import courier.*;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
@@ -7,7 +8,6 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import courier.*;
 
 
 public class CreateCourierTests {
@@ -23,14 +23,6 @@ public class CreateCourierTests {
         courierSteps = new CourierSteps();
         courierModel = courierRandomizer.createNewRandomCourier();
         courierAssert = new CourierAssert();
-    }
-
-    @After
-    @Step("Удаление тестовых данных")
-    public void deleteCourier() {
-        if (courierId != 0) {
-            courierSteps.deleteCourier(courierId);
-        }
     }
 
     @Test
@@ -69,6 +61,14 @@ public class CreateCourierTests {
         courierModel.setPassword(null);
         ValidatableResponse responseNullFields = courierSteps.createCourier(courierModel);
         courierAssert.createCourierError(responseNullFields);
+    }
+
+    @After
+    @Step("Удаление тестовых данных")
+    public void deleteCourier() {
+        if (courierId != 0) {
+            courierSteps.deleteCourier(courierId);
+        }
     }
 }
 
