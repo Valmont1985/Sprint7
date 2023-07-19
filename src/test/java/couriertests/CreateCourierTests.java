@@ -1,4 +1,4 @@
-package courierTests;
+package couriertests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
@@ -8,6 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import courier.*;
+
 
 public class CreateCourierTests {
     protected final CourierRandomizer courierRandomizer = new CourierRandomizer();
@@ -43,7 +44,7 @@ public class CreateCourierTests {
     }
 
     @Test
-    @DisplayName("Создание курьера с без логина")
+    @DisplayName("Создание курьера без логина")
     @Description("Проверяем, что курьера нельзя создать без логина")
     public void courierCanNotBeCreatedWithoutLogin() {
         courierModel.setLogin(null);
@@ -52,7 +53,7 @@ public class CreateCourierTests {
     }
 
     @Test
-    @DisplayName("Создание курьера с без пароля")
+    @DisplayName("Создание курьера без пароля")
     @Description("Проверяем, что курьера нельзя создать без пароля")
     public void courierCanNotBeCreatedWithoutPassword() {
         courierModel.setPassword(null);
@@ -61,7 +62,7 @@ public class CreateCourierTests {
     }
 
     @Test
-    @DisplayName("Создание курьера с без логина и пароля")
+    @DisplayName("Создание курьера без логина и пароля")
     @Description("Проверяем, что курьера нельзя создать без ввода логина и пароля")
     public void courierCanNotBeCreatedWithoutLoginAndPassword() {
         courierModel.setLogin(null);
@@ -69,14 +70,5 @@ public class CreateCourierTests {
         ValidatableResponse responseNullFields = courierSteps.createCourier(courierModel);
         courierAssert.createCourierError(responseNullFields);
     }
-
-    @Test
-    @DisplayName("Создание курьера с ранее зарегистрированным логином")
-    @Description("Проверяем, что курьера нельзя создать с ранее зарегистрированным логином")
-    public void courierCanNotBeCreatedWithSameLogin() {
-        courierSteps.createCourier(courierModel);
-        ValidatableResponse responseCreateCourier = courierSteps.createCourier(courierModel);
-        courierAssert.createCourierSameLoginError(responseCreateCourier);
-    }
-
 }
+

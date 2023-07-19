@@ -1,24 +1,17 @@
 package order;
 
+import constant.ApiSpecBuilder;
 import io.qameta.allure.Step;
-import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
-import io.restassured.specification.RequestSpecification;
-
-import static io.restassured.RestAssured.given;
 import static constant.ScooterApiEndpoints.*;
 
 public class OrderSteps {
 
-    public static RequestSpecification requestSpec() {
-        return given().log().all()
-                .contentType(ContentType.JSON)
-                .baseUri(BASE_URL);
-    }
+    private ApiSpecBuilder apiSpecBuilder = new ApiSpecBuilder();
 
     @Step("Создание заказа")
     public ValidatableResponse createNewOrder(OrderModel orderModel) {
-        return requestSpec()
+        return apiSpecBuilder.requestSpec()
                 .body(orderModel)
                 .when()
                 .post(ORDER_POST_CREATE)
@@ -27,7 +20,7 @@ public class OrderSteps {
 
     @Step("Получение списка заказов")
     public ValidatableResponse getOrderList() {
-        return requestSpec()
+        return apiSpecBuilder.requestSpec()
                 .when()
                 .get(ORDER_GET_LIST)
                 .then();
@@ -35,10 +28,12 @@ public class OrderSteps {
 
     @Step("Отмена заказа")
     public ValidatableResponse cancelOrder(int track) {
-        return requestSpec()
+        return apiSpecBuilder.requestSpec()
                 .body(track)
                 .when()
                 .put(ORDER_PUT_CANCEL)
                 .then();
     }
 }
+
+

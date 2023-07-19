@@ -1,5 +1,6 @@
-package courierTests;
+package couriertests;
 
+import courier.*;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import io.qameta.allure.junit4.DisplayName;
@@ -7,7 +8,6 @@ import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import courier.*;
 
 public class LoginCourierTests {
     private final CourierRandomizer courierRandomizer = new CourierRandomizer();
@@ -40,10 +40,9 @@ public class LoginCourierTests {
     @DisplayName("Логин курьера с пустым полем логина")
     @Description("Проверяем, что курьер не может войти в систему с пустым полем логина")
     public void courierLoginErrorEmptyLogin() {
-        CourierCreds courierCredsWithoutLogin = new CourierCreds("", courierModel.getPassword()); // c null тесты виснут
+        CourierCreds courierCredsWithoutLogin = new CourierCreds("", courierModel.getPassword());
         ValidatableResponse responseLoginErrorMessage = courierSteps.loginCourier(courierCredsWithoutLogin);
         courierAssert.loginCourierError(responseLoginErrorMessage);
-
     }
 
     @Test
@@ -56,7 +55,7 @@ public class LoginCourierTests {
     }
 
     @Test
-    @DisplayName("Логин курьера с пустым полями логина и пароля")
+    @DisplayName("Логин курьера с пустыми полями логина и пароля")
     @Description("Проверяем, что курьер не может войти в систему с пустыми полями логина и пароля")
     public void courierLoginErrorEmptyLoginAndPassword() {
         CourierCreds courierCredsWithoutLoginAndPassword = new CourierCreds("", "");
