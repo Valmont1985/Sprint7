@@ -12,7 +12,7 @@ import org.junit.Test;
 
 public class CreateCourierTests {
     protected final CourierRandomizer courierRandomizer = new CourierRandomizer();
-    int courierId;
+    private int courierId;
     private CourierSteps courierSteps;
     private CourierModel courierModel;
     private CourierAssert courierAssert;
@@ -66,9 +66,9 @@ public class CreateCourierTests {
     @After
     @Step("Удаление тестовых данных")
     public void deleteCourier() {
-        if (courierId != 0) {
-            courierSteps.deleteCourier(courierId);
+        courierSteps.deleteCourier(courierId);
+        System.out.println("Удален - " + courierId);
         }
-    }
 }
+
 

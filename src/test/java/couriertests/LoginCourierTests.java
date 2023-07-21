@@ -12,7 +12,7 @@ import org.junit.Test;
 public class LoginCourierTests {
     private final CourierRandomizer courierRandomizer = new CourierRandomizer();
     private CourierAssert courierAssert;
-    private int courierID;
+    private int courierId;
     private CourierCreds courierCreds;
     private CourierSteps courierSteps;
     private CourierModel courierModel;
@@ -33,7 +33,7 @@ public class LoginCourierTests {
     public void courierLoginOkValidData() {
         ValidatableResponse responseLoginCourier = courierSteps.loginCourier(courierCreds);
         courierAssert.loginCourierOk(responseLoginCourier);
-        courierID = responseLoginCourier.extract().path("id");
+        courierId = responseLoginCourier.extract().path("id");
     }
 
     @Test
@@ -75,8 +75,8 @@ public class LoginCourierTests {
     @After
     @Step("Удаление курьера")
     public void deleteCourier() {
-        if (courierID != 0) {
-            courierSteps.deleteCourier(courierID);
-        }
+        courierSteps.deleteCourier(courierId);
+        System.out.println("Удален - " + courierId);
     }
 }
+
