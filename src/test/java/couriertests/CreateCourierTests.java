@@ -33,6 +33,7 @@ public class CreateCourierTests {
         CourierCreds courierCreds = CourierCreds.from(courierModel);
         courierId = courierSteps.loginCourier(courierCreds).extract().path("id");
         courierAssert.createCourierOk(responseCreateCourier);
+        responseCreateCourier.assertThat().statusCode(201);
     }
 
     @Test
@@ -42,6 +43,7 @@ public class CreateCourierTests {
         courierModel.setLogin(null);
         ValidatableResponse responseNullLogin = courierSteps.createCourier(courierModel);
         courierAssert.createCourierError(responseNullLogin);
+        responseNullLogin.assertThat().statusCode(400);
     }
 
     @Test
@@ -51,6 +53,7 @@ public class CreateCourierTests {
         courierModel.setPassword(null);
         ValidatableResponse responseNullPassword = courierSteps.createCourier(courierModel);
         courierAssert.createCourierError(responseNullPassword);
+        responseNullPassword.assertThat().statusCode(400);
     }
 
     @Test
@@ -61,14 +64,19 @@ public class CreateCourierTests {
         courierModel.setPassword(null);
         ValidatableResponse responseNullFields = courierSteps.createCourier(courierModel);
         courierAssert.createCourierError(responseNullFields);
+        responseNullFields.assertThat().statusCode(400);
     }
 
     @After
     @Step("Удаление тестовых данных")
     public void deleteCourier() {
-        courierSteps.deleteCourier(courierId);
-        System.out.println("Удален - " + courierId);
+        if (courierId != 0) {
+            courierSteps.deleteCourier(courierId);
+            System.out.println("Удален - " + courierId);
+        } else {
+            System.out.println("Не удалось удалить курьера, так как ID не найден");
         }
+    }
 }
 
 

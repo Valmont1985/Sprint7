@@ -7,7 +7,7 @@ import static constant.ScooterApiEndpoints.*;
 
 public class CourierSteps {
 
-    private ApiSpecBuilder apiSpecBuilder = new ApiSpecBuilder();
+    private final ApiSpecBuilder apiSpecBuilder = new ApiSpecBuilder();
 
     @Step("Регистрация нового курьера")
     public ValidatableResponse createCourier(CourierModel courierModel) {
@@ -28,8 +28,8 @@ public class CourierSteps {
     }
 
     @Step("Удаление курьера")
-    public ValidatableResponse deleteCourier(int courierId) {
-        return apiSpecBuilder.requestSpec()
+    public void deleteCourier(int courierId) {
+        apiSpecBuilder.requestSpec()
                 .when()
                 .delete(COURIER_DELETE + courierId)
                 .then();

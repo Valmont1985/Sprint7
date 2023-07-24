@@ -9,6 +9,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+
 public class LoginCourierTests {
     private final CourierRandomizer courierRandomizer = new CourierRandomizer();
     private CourierAssert courierAssert;
@@ -34,6 +37,7 @@ public class LoginCourierTests {
         ValidatableResponse responseLoginCourier = courierSteps.loginCourier(courierCreds);
         courierAssert.loginCourierOk(responseLoginCourier);
         courierId = responseLoginCourier.extract().path("id");
+        responseLoginCourier.assertThat().body("id", greaterThan(0)).and().statusCode(200);
     }
 
     @Test
@@ -43,6 +47,7 @@ public class LoginCourierTests {
         CourierCreds courierCredsWithoutLogin = new CourierCreds("", courierModel.getPassword());
         ValidatableResponse responseLoginErrorMessage = courierSteps.loginCourier(courierCredsWithoutLogin);
         courierAssert.loginCourierError(responseLoginErrorMessage);
+        responseLoginErrorMessage.assertThat().body("message", equalTo("Недостаточно данных для входа")).and().statusCode(400);
     }
 
     @Test
@@ -52,6 +57,7 @@ public class LoginCourierTests {
         CourierCreds courierCredsWithoutPass = new CourierCreds(courierModel.getLogin(), "");
         ValidatableResponse responseLoginErrorMessage = courierSteps.loginCourier(courierCredsWithoutPass);
         courierAssert.loginCourierError(responseLoginErrorMessage);
+        responseLoginErrorMessage.assertThat().body("message", equalTo("Недостаточно данных для входа")).and().statusCode(400);
     }
 
     @Test
@@ -61,7 +67,9 @@ public class LoginCourierTests {
         CourierCreds courierCredsWithoutLoginAndPassword = new CourierCreds("", "");
         ValidatableResponse responseLoginErrorMessage = courierSteps.loginCourier(courierCredsWithoutLoginAndPassword);
         courierAssert.loginCourierError(responseLoginErrorMessage);
+        responseLoginErrorMessage.assertThat().body("message", equalTo("Недостаточно данных для входа")).and().statusCode(400);
     }
+
 
     @Test
     @DisplayName("Логин курьера c не корректным логином")
@@ -70,13 +78,18 @@ public class LoginCourierTests {
         CourierCreds courierCredsErrorAccountNotFound = new CourierCreds(CourierRandomizer.NEW_LOGIN_FAKED, courierModel.getPassword());
         ValidatableResponse responseLoginErrorMessage = courierSteps.loginCourier(courierCredsErrorAccountNotFound);
         courierAssert.loginCourierErrorAccountNotFound(responseLoginErrorMessage);
+        responseLoginErrorMessage.assertThat().body("message", equalTo("Учетная запись не найдена")).and().statusCode(404);
     }
 
     @After
     @Step("Удаление курьера")
     public void deleteCourier() {
-        courierSteps.deleteCourier(courierId);
-        System.out.println("Удален - " + courierId);
+        if (courierId != 0) {
+            courierSteps.deleteCourier(courierId);
+            System.out.println("Удален - " + courierId);
+        } else {
+            System.out.println("Не удалось удалить курьера, так как ID не найден");
+        }
     }
 }
 
