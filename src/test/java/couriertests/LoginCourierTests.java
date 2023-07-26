@@ -28,6 +28,7 @@ public class LoginCourierTests {
         courierSteps.createCourier(courierModel);
         courierCreds = CourierCreds.from(courierModel);
         courierAssert = new CourierAssert();
+        courierId = courierSteps.loginCourier(courierCreds).extract().path("id");
     }
 
     @Test

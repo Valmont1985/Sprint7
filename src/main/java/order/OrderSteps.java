@@ -7,7 +7,7 @@ import static constant.ScooterApiEndpoints.*;
 
 public class OrderSteps {
 
-    private ApiSpecBuilder apiSpecBuilder = new ApiSpecBuilder();
+    private final ApiSpecBuilder apiSpecBuilder = new ApiSpecBuilder();
 
     @Step("Создание заказа")
     public ValidatableResponse createNewOrder(OrderModel orderModel) {
